@@ -1,10 +1,9 @@
-import Events from "@/components/Events";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import LoginForm from "@/components/LoginForm";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
+import React from "react";
 
-export default function Home() {
+function Login() {
   return (
     <>
       <Head>
@@ -12,11 +11,10 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <Hero />
-        <Events />
+        <LoginForm />
       </main>
-
-      <Footer />
     </>
   );
 }
+
+export default Login;

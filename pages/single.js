@@ -7,7 +7,7 @@ function Single() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="bg-gray-900 h-full">
         <SingleEventHero />
         <SingleEventDetails />
       </main>

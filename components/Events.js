@@ -11,14 +11,10 @@ function Events() {
           <Event />
           <Event />
           <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
+
+          <button className="text-white mt-6 uppercase py-2 bg-indigo-500 border-0 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Browse more
+          </button>
         </div>
       </section>
     </section>

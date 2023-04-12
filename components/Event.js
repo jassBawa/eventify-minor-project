@@ -15,7 +15,7 @@ function Event() {
           CATEGORY
         </h3>
         <h2 className="text-gray-900 title-font text-lg font-medium">
-          Shooting Stars
+          Event Title
         </h2>
         <p className="mt-1">$21.15</p>
       </div>

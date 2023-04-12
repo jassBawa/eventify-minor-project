@@ -26,19 +26,19 @@ function Hero() {
         </div>
         <div className="relative lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
           <img
-            className="absolute top-0 left-4 h-48 object-cover object-center rounded"
+            className="absolute z-10 top-0 left-4 h-56 w-56 object-cover object-center  border-2 border-white rounded-full hover:scale-105 transition-all outline hover:outline-[.4rem] hover:z-20 hover:outline-offset-4 hover:outline-indigo-500"
             alt="hero"
-            src="https://dummyimage.com/720x600"
+            src="https://www.niti.gov.in/sites/default/files/2021-11/ReinvigoratingSports-inRuralAreas-cover.jpg"
           />
           <img
-            className="absolute top-0 right-4 h-48 object-cover object-center rounded"
+            className="absolute z-10 top-0 right-24 h-56 w-56 object-cover object-center border-2 border-white  rounded-full hover:scale-105 transition-all outline hover:outline-[.4rem] hover:z-20 hover:outline-offset-4 hover:outline-indigo-500"
             alt="hero"
-            src="https://dummyimage.com/720x600"
+            src="https://www.liveabout.com/thmb/t-cb7eQU1JencqSuofPSfWlzQOg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/application-developers-at-work--629201600-5914bf4a5f9b58647023e72f.jpg"
           />
           <img
-            className="absolute bottom-5 h-48 object-cover object-center rounded"
+            className="absolute z-10 -bottom-16 left-24 h-56 w-56 object-cover object-center border-2 border-white rounded-full hover:scale-105 transition-all outline hover:outline-[.4rem] hover:z-20 hover:outline-offset-4 hover:outline-indigo-500"
             alt="hero"
-            src="https://dummyimage.com/720x600"
+            src="https://cityspideynews.s3.amazonaws.com/uploads/spidey/202110/bhangra-cover-(wikimedia)-1634646199.png"
           />
         </div>
       </div>
