@@ -11,7 +11,7 @@ function Login() {
       </Head>
       <main>
         <Navbar />
-        <LoginForm />
+        < LoginForm />
       </main>
     </>
   );
