@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 
 function Hero() {
@@ -17,9 +16,9 @@ function Hero() {
             college events, all in one easy-to-use platform.
           </p>
           <div className="flex justify-center">
-            <Link href="/login" className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
               Register
-            </Link>
+            </button>
             <button className="ml-4 text-gray-700 transition-all border-transparent border-b-2 hover:border-blue-300 w-3/4 px-4 focus:outline-none text-lg">
               Learn more!
             </button>

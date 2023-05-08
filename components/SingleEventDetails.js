@@ -59,11 +59,11 @@ function SingleEventDetails() {
           </div>
 
           <form action="">
-            <div className=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
-              <h2 className="text-indigo-900 text-xl uppercase   font-medium title-font">
+            <div class=" bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
+              <h2 class="text-indigo-900 text-xl uppercase   font-medium title-font">
                 Register Now
               </h2>
-              <p className="leading-relaxed mb-5 text-gray-600">
+              <p class="leading-relaxed mb-5 text-gray-600">
                 Please fill the form below to register for the event
               </p>
               <div className="grid grid-cols-2 gap-4">
@@ -82,13 +82,13 @@ function SingleEventDetails() {
                 <FormInput label="Branch" placeholder="CSE" name="branch" />
                 <FormInput label="Section" placeholder="B1" name="section" />
               </div>
-              <p className="text-xs text-gray-500 mt-3">
+              <p class="text-xs text-gray-500 mt-3">
                 By filling out this form and clicking submit you acknowledge our
                 privacy policy
               </p>
               <button
                 type="submit"
-                className="text-white mt-6 uppercase py-4 bg-indigo-500 border-0 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                class="text-white mt-6 uppercase py-4 bg-indigo-500 border-0 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
               >
                 Register
               </button>

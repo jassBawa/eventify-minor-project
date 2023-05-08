@@ -10,17 +10,17 @@ function Navbar() {
           href="/"
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
         >
-          <TailBlocksIcon className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" />
+          <TailBlocksIcon className="h-5 w-5" />
           <span className="ml-3 text-xl">Eventify</span>
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/" className="mr-5 hover:text-gray-900">
             Home
           </Link>
-          <Link href="events" className="mr-5 hover:text-gray-900">
+          <Link href="#" className="mr-5 hover:text-gray-900">
             Events
           </Link>
-          <Link href="/about-us" className="mr-5 hover:text-gray-900">
+          <Link href="#" className="mr-5 hover:text-gray-900">
             About Us
           </Link>
         </nav>
