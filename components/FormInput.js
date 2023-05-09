@@ -6,8 +6,8 @@ function FormInput({
   name = "id",
 }) {
   return (
-    <div class="relative">
-      <label for="email" class="leading-7 text-sm text-gray-600">
+    <div className="relative">
+      <label for="email" className="leading-7 text-sm text-gray-600">
         {label}
       </label>
       <input
@@ -16,7 +16,7 @@ function FormInput({
         id={name}
         name={name}
         placeholder={placeholder}
-        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
       />
     </div>
   );
