@@ -3,7 +3,7 @@ import React from "react";
 import Event from "./Event";
 
 function Events({ events }) {
-  console.log(events)
+
   return (
     <section className="container mx-auto">
       <h2 className="text-3xl font-semibold">Upcoming Events</h2>

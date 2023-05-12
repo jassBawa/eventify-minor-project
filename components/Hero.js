@@ -16,13 +16,13 @@ function Hero() {
             brings you a comprehensive collection of the latest and greatest
             college events, all in one easy-to-use platform.
           </p>
-          <div className="flex justify-center">
-            <Link href="/login" className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Register
+          <div className="flex justify-center gap-4">
+            <Link href="/events" className="text-white w-full flex justify-center items-center py-2 bg-indigo-500 border-0 px-4 text-center  focus:outline-none hover:bg-indigo-600 rounded">
+              View All
             </Link>
-            <button className="ml-4 text-gray-700 transition-all border-transparent border-b-2 hover:border-blue-300 w-3/4 px-4 focus:outline-none text-lg">
-              Learn more!
-            </button>
+            <Link href='/about' className="ml-4 text-gray-700 transition-all border-b-2 border-gray-100 text-sm flex justify-center items-center border-transparent border-b-2 hover:border-blue-300  px-4 focus:outline-none">
+              More!
+            </Link>
           </div>
         </div>
         <div className="relative lg:max-w-lg lg:w-full md:w-1/2 w-5/6">

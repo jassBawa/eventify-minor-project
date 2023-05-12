@@ -33,24 +33,24 @@ function Footer() {
               </h2>
               <nav className="list-none space-y-1 mb-10">
                 <li>
-                  <Link href="#" className="text-gray-200 hover:text-gray-400">
+                  <span href="#" className="text-gray-200 hover:text-gray-400">
                     Sports
-                  </Link>
+                  </span>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-200 hover:text-gray-400">
+                  <span href="#" className="text-gray-200 hover:text-gray-400">
                     Technical
-                  </Link>
+                  </span>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-200 hover:text-gray-400">
+                  <span href="#" className="text-gray-200 hover:text-gray-400">
                     Cultural
-                  </Link>
+                  </span>
                 </li>
                 <li>
-                  <Link href="#" className="text-gray-200 hover:text-gray-400">
+                  <span href="#" className="text-gray-200 hover:text-gray-400">
                     See All
-                  </Link>
+                  </span>
                 </li>
               </nav>
             </div>

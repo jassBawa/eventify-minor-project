@@ -1,12 +1,12 @@
 import React from "react";
 
-function SingleEventHero() {
+function SingleEventHero({ image }) {
   return (
     // Hero Section
     <section>
       <div className="relative h-96 w-full">
         <img
-          src="https://i0.wp.com/www.thebigday.co.in/wp-content/uploads/2021/01/Corporate-Events.jpg?w=1500&ssl=1"
+          src={image}
           className="absolute h-full w-full object-cover "
         />
         <div className="bg-gradient-to-br bg-black opacity-70 absolute h-full w-full" />

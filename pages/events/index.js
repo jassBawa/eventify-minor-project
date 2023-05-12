@@ -33,7 +33,6 @@ export const getStaticProps = async () => {
     const eventListUrl = 'http://localhost:4040/api/user/event'
     const res = await axios.get(eventListUrl);
     const data = await res.data
-    console.log(data)
 
     return {
         props: { events: data }

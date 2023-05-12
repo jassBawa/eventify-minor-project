@@ -1,16 +1,17 @@
 import { formatDate } from "@/utils/date-formatters";
+import Link from "next/link";
 import React from "react";
 
 function Event({ event }) {
   const { eventName, date, image } = event;
   const formattedDate = formatDate(date)
   return (
-    <div className="lg:w-1/5 md:w-1/2 p-4 w-full transition-transform hover:scale-105 cursor-pointer">
+    <Link href={`/events/${event._id}`} className="lg:w-1/5 md:w-1/2 p-4 w-full transition-transform hover:scale-105 cursor-pointer">
       <a className="block relative h-56 rounded overflow-hidden">
         <img
           alt="ecommerce"
           className="object-cover object-center w-full h-full block"
-          src={"https://dummyimage.com/421x261" || image}
+          src={image}
         />
       </a>
       <div className="mt-4">
@@ -22,7 +23,7 @@ function Event({ event }) {
         </h2>
         <p className="mt-1 tracking-wider">{formattedDate}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
