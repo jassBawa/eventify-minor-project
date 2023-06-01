@@ -1,9 +1,12 @@
 import Events from "@/components/Events";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import FeedbackForm from "@/components/Landing/FeedbackForm";
 import Navbar from "@/components/Navbar";
-import axios from "axios";
+import { getAllEvents } from "@/services/api";
+import { store } from "@/store/store";
 import Head from "next/head";
+import { useEffect } from "react";
 
 export default function Home({ events }) {
   return (
@@ -15,6 +18,7 @@ export default function Home({ events }) {
         <Navbar />
         <Hero />
         <Events events={events} />
+        <FeedbackForm />
       </main>
 
       <Footer />
@@ -22,12 +26,16 @@ export default function Home({ events }) {
   );
 }
 
-export const getStaticProps = async () => {
-  const eventListUrl = 'http://localhost:4040/api/user/event'
-  const res = await axios.get(eventListUrl);
-  const data = await res.data
-
-  return {
-    props: { events: data.slice(0, 4) }
+export const getServerSideProps = async () => {
+  try {
+    const data = await getAllEvents();
+    return {
+      props: { events: data?.slice(0, 4) },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: { events: [] },
+    };
   }
-}
+};

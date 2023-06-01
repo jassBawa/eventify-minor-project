@@ -75,7 +75,9 @@ function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-200 hover:text-gray-400">Itian Club</a>
+                  <a className="text-gray-200 hover:text-gray-400">
+                    Itian Club
+                  </a>
                 </li>
               </nav>
             </div>

@@ -1,40 +1,42 @@
-import React from 'react'
+import React from "react";
 
 import Events from "@/components/Events";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
-import axios from 'axios';
-
+import { getAllEvents } from "@/services/api";
 
 function EventPage({ events }) {
-    return (
-        <>
-            <Head>
-                <title>Eventify</title>
-            </Head>
-            <main className='space-y-12'>
-                <Navbar />
-                <Events
-                    events={events}
-                />
-            </main>
+  return (
+    <>
+      <Head>
+        <title>Eventify</title>
+      </Head>
+      <div className="relative">
+        <main className="">
+          <Navbar />
+          <Events events={events} />
+        </main>
 
-            <Footer />
-        </>
-    )
+        <Footer />
+      </div>
+    </>
+  );
 }
 
-export default EventPage
+export default EventPage;
 
-
-
-export const getStaticProps = async () => {
-    const eventListUrl = 'http://localhost:4040/api/user/event'
-    const res = await axios.get(eventListUrl);
-    const data = await res.data
-
+export const getServerSideProps = async () => {
+  let data;
+  try {
+    data = await getAllEvents();
     return {
-        props: { events: data }
-    }
-}
+      props: { events: data },
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      props: { events: [] },
+    };
+  }
+};
