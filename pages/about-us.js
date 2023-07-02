@@ -1,24 +1,23 @@
-import AboutHero from '@/components/AboutHero'
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
-import Head from 'next/head'
-import React from 'react'
+import AboutHero from "@/components/About/AboutHero";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Head from "next/head";
+import React from "react";
 
 function AboutUs() {
-    return (
-        <>
-            <Head>
-                <title>Eventify</title>
-            </Head>
-            <main>
-                <Navbar />
-                <AboutHero />
+  return (
+    <>
+      <Head>
+        <title>Eventify</title>
+      </Head>
+      <main>
+        <Navbar />
+        <AboutHero />
+      </main>
 
-            </main>
-
-            <Footer />
-        </>
-    )
+      <Footer />
+    </>
+  );
 }
 
-export default AboutUs
+export default AboutUs;

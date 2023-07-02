@@ -1,8 +1,8 @@
 import React from "react";
 
-import Events from "@/components/Events";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Events from "@/components/Events/Events";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import Head from "next/head";
 import { getAllEvents } from "@/services/api";
 

@@ -1,27 +1,30 @@
 import EventTable from "@/components/Dashboard/EventTable";
-import EventModal from "@/components/Modal";
-import Navbar from "@/components/Navbar";
+import EventModal from "@/components/Dashboard/EventModal";
+import Navbar from "@/components/layout/Navbar";
+import requireAuth from "@/components/shared/withAuth";
+import useFetch from "@/hooks/useFetch";
 import { getAdminEvents } from "@/services/api";
+import { openModal } from "@/store/modalSlice";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
 
-function Dashboard({ list = [1, 1, 1, 1, 1] }) {
+function Dashboard() {
   const [showModal, setShowModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTag, setActiveTag] = useState("all");
+  const dispatch = useDispatch();
 
   // Function to handle search input changes
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Function to filter the list based on the search query
-  const filterList = () => {
+  const filterList = useMemo(() => {
     return events.filter((event) =>
       event.eventName.toLowerCase().includes(searchQuery.toLowerCase())
     );
-  };
+  }, [events, searchQuery]);
 
   useEffect(() => {
     // Fetch events from the API and update the state
@@ -73,7 +76,14 @@ function Dashboard({ list = [1, 1, 1, 1, 1] }) {
               </div>
               <div className="w-1/3 text-right">
                 <button
-                  onClick={() => setShowModal(true)}
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        operationType: "CREATE",
+                        modalData: {},
+                      })
+                    )
+                  }
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                 >
                   Create
@@ -100,7 +110,7 @@ function Dashboard({ list = [1, 1, 1, 1, 1] }) {
   );
 }
 
-export default Dashboard;
+export default requireAuth(Dashboard);
 
 // export const getStaticProps = async () => {
 //     const res = await getAdminEvents();

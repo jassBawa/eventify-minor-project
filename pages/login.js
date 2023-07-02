@@ -1,5 +1,5 @@
-import LoginForm from "@/components/LoginForm";
-import Navbar from "@/components/Navbar";
+import LoginForm from "@/components/shared/LoginForm";
+import Navbar from "@/components/layout/Navbar";
 import Head from "next/head";
 import React from "react";
 
@@ -11,7 +11,7 @@ function Login() {
       </Head>
       <main>
         <Navbar />
-        < LoginForm />
+        <LoginForm />
       </main>
     </>
   );

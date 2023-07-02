@@ -1,12 +1,11 @@
-import Events from "@/components/Events";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import Events from "@/components/Events/Events";
+import Footer from "@/components/layout/Footer";
+import LandingHero from "@/components/Landing/LandingHero";
+import ImageGallery from "@/components/Landing/ImageGallery";
 import FeedbackForm from "@/components/Landing/FeedbackForm";
-import Navbar from "@/components/Navbar";
-import { getAllEvents } from "@/services/api";
-import { store } from "@/store/store";
+import Navbar from "@/components/layout/Navbar";
 import Head from "next/head";
-import { useEffect } from "react";
+import { getAllEvents } from "@/services/api";
 
 export default function Home({ events }) {
   return (
@@ -16,8 +15,9 @@ export default function Home({ events }) {
       </Head>
       <main>
         <Navbar />
-        <Hero />
+        <LandingHero />
         <Events events={events} />
+        <ImageGallery />
         <FeedbackForm />
       </main>
 
