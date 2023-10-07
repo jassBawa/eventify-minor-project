@@ -17,7 +17,7 @@ function Navbar({ classes = "" }) {
   };
   return (
     <header
-      className={`text-gray-600 body-font bg-white relative z-50 ${classes}`}
+      className={`text-gray-600 body-font bg-white shadow-md relative z-50 ${classes}`}
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link

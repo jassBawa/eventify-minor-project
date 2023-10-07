@@ -5,7 +5,9 @@ import { useSelector } from "react-redux";
 const requireAuth = (WrappedComponent) => {
   const Wrapper = (props) => {
     const router = useRouter();
-    const isLoggedIn = useSelector((state) => state.admin.isLoggedIn);
+
+    const token = localStorage.getItem("accessToken");
+    const isLoggedIn = token ? true : false;
 
     useEffect(() => {
       if (!isLoggedIn) {

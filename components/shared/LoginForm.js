@@ -1,6 +1,6 @@
 import useFormValidation from "@/hooks/useFormValidation";
 import { adminLogin } from "@/services/api";
-import { setAdminData, setLoggedIn } from "@/store/adminSlice";
+import { setAdminData, setLoggedIn } from "@/store/slices/adminSlice";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -43,6 +43,8 @@ function LoginForm() {
       );
 
       router.push("/dashboard");
+    } else {
+      toast.error("Something went wrong");
     }
   };
 
@@ -108,7 +110,7 @@ function LoginForm() {
                 </p>
                 <button
                   className="bg-indigo-400 w-full mt-4 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="button"
+                  type="submit"
                 >
                   Sign In
                 </button>

@@ -1,12 +1,14 @@
-import axios from "axios";
+import axios from "./axios";
 
-const BASE_URL = "http://localhost:4040/api";
+// const BASE_URL = "http://localhost:4040/api"
 
-const adminLoginUrl = "http://localhost:4040/api/admin/login";
-const createEventUrl = "http://localhost:4040/api/user/event";
-const getAdminEventsUrl = "http://localhost:4040/api/user/events";
-const getAllEventsUrl = "http://localhost:4040/api/user/event";
-const getSingleEventUrl = "http://localhost:4040/api/user/event/";
+const adminLoginUrl = "/admin/login";
+const createEventUrl = "/user/event";
+const getAdminEventsUrl = "/user/events";
+const getAllEventsUrl = "/user/event";
+const getSingleEventUrl = "/user/event/";
+const updateEventUrl = "/user/event/";
+const deleteEventUrl = "/user/event/";
 
 // ----------------------------- Admin Events -----------------------------
 
@@ -37,7 +39,7 @@ export const updateEvent = async (eventId, updateEventParams) => {
   const headers = { Authorization: `Bearer ${token}` };
 
   const res = await axios.put(
-    `${BASE_URL}/user/event/${eventId}`,
+    `${updateEventUrl + eventId}`,
     updateEventParams,
     {
       headers: headers,
@@ -50,21 +52,24 @@ export const updateEvent = async (eventId, updateEventParams) => {
 
 // to get all events created by admin
 export const getAdminEvents = async (apiHeaders) => {
-  const headers = { Authorization: `Bearer ${apiHeaders}` };
+  try {
+    const headers = { Authorization: `Bearer ${apiHeaders}` };
 
-  const res = await axios.get(getAdminEventsUrl, {
-    headers: headers,
-  });
-  const data = res.data;
-
-  return data;
+    const res = await axios.get(getAdminEventsUrl, {
+      headers: headers,
+    });
+    const data = res.data;
+    return data;
+  } catch (e) {
+    throw e;
+  }
 };
 
 // to delete event
 export const deleteEvent = async (eventId, apiHeaders) => {
   const headers = { Authorization: `Bearer ${apiHeaders}` };
 
-  const res = await axios.delete(BASE_URL + "/user/event/" + eventId, {
+  const res = await axios.delete("/user/event/" + eventId, {
     headers: headers,
   });
   const data = res.data;
@@ -111,12 +116,15 @@ export const getSingleEvent = async (eventId) => {
   return data;
 };
 
+// to give feedback
 export const giveFeedback = async (feedbackParams) => {
-  const res = await axios.post(
-    `http://localhost:4040/api/users/feedback`,
-    feedbackParams
-  );
-  const data = res.data;
-
-  return data;
+  try {
+    const res = await axios.post(`/users/feedback`, feedbackParams);
+    const data = res.data;
+    return data;
+  } catch (error) {
+    // Handle the error
+    console.error("Error giving feedback:", error);
+    throw error;
+  }
 };

@@ -1,13 +1,17 @@
-import { deleteEvent, getRegisteredUsers } from "@/services/api";
-import { openModal } from "@/store/modalSlice";
-import { formatDate } from "@/utils/date-formatters";
-import exportFromJSON from "export-from-json";
+// package imports
 import React from "react";
-import { connect, useDispatch } from "react-redux";
+import exportFromJSON from "export-from-json";
+import { useDispatch } from "react-redux";
+
+// local imports
+import { openModal } from "@/store/slices/modalSlice";
+import { formatDate } from "@/utils/date-formatters";
+import { deleteEvent, getRegisteredUsers } from "@/services/api";
+
+const exportType = "csv";
 
 function EventTable({ filterList }) {
   const dispatch = useDispatch();
-  const exportType = "csv";
 
   const handleDownload = async (eventId) => {
     const data = await getRegisteredUsers(eventId);

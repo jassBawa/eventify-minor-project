@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import requireAuth from "@/components/shared/withAuth";
 import useFetch from "@/hooks/useFetch";
 import { getAdminEvents } from "@/services/api";
-import { openModal } from "@/store/modalSlice";
+import { openModal } from "@/store/slices/modalSlice";
 import Head from "next/head";
 import React, { use, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -26,25 +26,26 @@ function Dashboard() {
     );
   }, [events, searchQuery]);
 
+  // Fetch events from the API and update the state
+
+  const fetchEvents = async () => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await getAdminEvents(token);
+
+      setEvents(response);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+
   useEffect(() => {
-    // Fetch events from the API and update the state
-    const fetchEvents = async () => {
-      const token = localStorage.getItem("accessToken");
-
-      try {
-        const response = await getAdminEvents(token);
-
-        setEvents(response);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
     fetchEvents();
-  }, []);
+  }, [showModal]);
 
   return (
-    <>
+    <div className="bg-gray-100">
       <Head></Head>
       <div className="bg-gray-100 h-full">
         <Navbar />
@@ -76,6 +77,12 @@ function Dashboard() {
               </div>
               <div className="w-1/3 text-right">
                 <button
+                  className="bg-blue-500 mr-4 text-white px-4 py-2 rounded-lg"
+                  onClick={fetchEvents}
+                >
+                  Refresh
+                </button>
+                <button
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -91,14 +98,6 @@ function Dashboard() {
               </div>
             </div>
             <div className="mt-4">
-              <div className="tags mb-8 flex gap-4 items-center">
-                <span className="bg-blue-400 cursor-pointer text-white py-2 rounded-lg text-xs px-4">
-                  All Events
-                </span>
-                <span className="bg-blue-400 text-white py-2 rounded-lg text-xs px-4">
-                  Upcoming
-                </span>
-              </div>
               <div className="shadow py-2 overflow-hidden rounded-lg border-b border-gray-200">
                 <EventTable filterList={filterList} />
               </div>
@@ -106,7 +105,7 @@ function Dashboard() {
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -42,7 +42,7 @@ function SingleEventDetails({ event }) {
                   <div className="item__group flex gap-4 items-center">
                     <TagIcon className="h-5 w-5" />
                     <span className="item__placeholder opacity-60">
-                      Category
+                      {event.category}
                     </span>
                   </div>
                 </div>
@@ -50,8 +50,8 @@ function SingleEventDetails({ event }) {
             </div>
 
             <div className="left__description">
-              <h3 className="text-2xl text-white mt-8">Description</h3>
-              <p className="text-gray-400 mt-4">{event.description}</p>
+              <h3 className="text-3xl mt-8">Description</h3>
+              <p className="text-gray-600 mt-4">{event.description}</p>
             </div>
           </div>
           <RegisterForm />

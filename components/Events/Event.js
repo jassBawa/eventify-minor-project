@@ -4,7 +4,8 @@ import Link from "next/link";
 import React from "react";
 
 function Event({ event, isDisabled = false }) {
-  const { eventName, date, image } = event;
+  console.log(event);
+  const { eventName, date, image, category } = event;
   const formattedDate = formatDate(date);
   return (
     <Link
@@ -25,7 +26,7 @@ function Event({ event, isDisabled = false }) {
       </div>
       <div className="mt-4">
         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-          CATEGORY
+          {category}
         </h3>
         <h2 className="text-gray-900 title-font text-lg font-medium">
           {eventName}

@@ -3,16 +3,18 @@ import SingleEventDetails from "@/components/Events/SingleEventDetails";
 import SingleEventHero from "@/components/Events/SingleEventHero";
 import { getSingleEvent } from "@/services/api";
 import React from "react";
+import Footer from "@/components/layout/Footer";
 
 function EventPage({ event }) {
   const { image } = event;
   return (
-    <div>
+    <div className="bg-[#f1f2f3] ">
       <Navbar classes="" />
-      <main className=" h-full overflow-auto">
+      <main className="bg-[#f1f2f3] h-screen overflow-auto">
         <SingleEventHero image={image} />
         <SingleEventDetails event={event} />
       </main>
+      <Footer />
     </div>
   );
 }

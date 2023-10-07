@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
 import { createEvent, updateEvent } from "@/services/api";
-import { closeModal, updateModalData } from "@/store/modalSlice";
+import { closeModal, updateModalData } from "@/store/slices/modalSlice";
 
-function EventModal() {
+function EventModal({ showModal, setShowModal }) {
   const dispatch = useDispatch();
   const { isOpen, operationType, modalData } = useSelector(
     (state) => state.modal
@@ -53,10 +53,7 @@ function EventModal() {
       venue: modalData.venue,
     });
 
-    if (res.message) {
-      toast.success("Event added");
-      closeModal();
-    }
+    toast.success("Event added");
 
     // Call API to create event here
     setIsSubmitting(false);

@@ -83,29 +83,18 @@ function RegisterForm() {
             <label htmlFor="year" className="leading-7 text-sm text-gray-600">
               Year
             </label>
-            <select
-              name="year"
-              className="w-full py-2 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base px-2 pr-8 leading-8 transition-colors duration-200 ease-in-out"
-              id="year"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            >
-              <option value="1st">1st</option>
-              <option value="2nd">2nd</option>
-              <option value="3rd">3rd</option>
-              <option value="4th">4th</option>
-            </select>
-            {/* <input
+            <input
               type="text"
               required
               id="year"
               name="year"
-              placeholder="2nd"
               value={year}
               onChange={(e) => setYear(e.target.value)}
+              placeholder="1stj"
               className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            /> */}
+            />
           </div>
+
           <div className="relative">
             <label htmlFor="branch" className="leading-7 text-sm text-gray-600">
               Branch
