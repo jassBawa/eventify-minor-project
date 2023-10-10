@@ -65,6 +65,17 @@ export const getAdminEvents = async (apiHeaders) => {
   }
 };
 
+export const getSingleAdminEvent = async (payload) => {
+  const res = await axios.get(getSingleEventUrl + payload.eventId, {
+    headers: {
+      Authorization: `Bearer ${payload.token}`,
+    },
+  });
+  const data = await res.data;
+
+  return data;
+};
+
 // to delete event
 export const deleteEvent = async (eventId, apiHeaders) => {
   const headers = { Authorization: `Bearer ${apiHeaders}` };

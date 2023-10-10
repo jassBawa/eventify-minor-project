@@ -5,3 +5,7 @@ export { default as TagIcon } from "./tag-icon.svg";
 export { default as TailBlocksIcon } from "./tailblocks-icon.svg";
 export { default as StarOutlinedIcon } from "./starOutlined-icon.svg";
 export { default as StarSolidIcon } from "./starSolid-icon.svg";
+export { default as EventIcon } from "./event-icon.svg";
+export { default as CategoryIcon } from "./category-icon.svg";
+export { default as RegistrationIcon } from "./registration-icon.svg";
+export { default as FilterIcon } from "./filter-icon.svg";

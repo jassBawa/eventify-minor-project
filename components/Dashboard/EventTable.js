@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { openModal } from "@/store/slices/modalSlice";
 import { formatDate } from "@/utils/date-formatters";
 import { deleteEvent, getRegisteredUsers } from "@/services/api";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 const exportType = "csv";
 
@@ -18,11 +20,12 @@ function EventTable({ filterList }) {
     exportFromJSON({ data, eventId, exportType });
   };
 
+  // TODO --> remove localstorage
   const handleDelete = async (eventId) => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await deleteEvent(eventId, token);
-      if (response.message) {
+      if (response) {
         toast.success("Event deleted");
       }
     } catch (error) {
@@ -99,11 +102,12 @@ function EventTable({ filterList }) {
                       alt=""
                     />
                   </div>
-                  <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">
-                      {event.eventName}
-                    </div>
-                  </div>
+                  <Link
+                    href={"dashboard/" + event._id}
+                    className="ml-4 text-sm font-medium text-gray-900"
+                  >
+                    {event.eventName}
+                  </Link>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
@@ -122,7 +126,7 @@ function EventTable({ filterList }) {
                 </button>
               </td>
               <td className="">
-                <button
+                {/* <button
                   href="#"
                   className="ml-4 text-gray-600 hover:text-indigo-900"
                   onClick={() => handleEdit(event._id)}
@@ -138,7 +142,7 @@ function EventTable({ filterList }) {
                       fill="#3C3C3C"
                     />
                   </svg>
-                </button>
+                </button> */}
                 <button
                   href="#"
                   className="ml-8 text-red-600 hover:text-indigo-900"

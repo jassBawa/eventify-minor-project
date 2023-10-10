@@ -31,6 +31,11 @@ function Navbar({ classes = "" }) {
           <Link href="/" className="mr-5 hover:text-gray-900">
             Home
           </Link>
+          {isLoggedIn && (
+            <Link href={"/dashboard"} className="mr-5 hover:text-gray-900">
+              Dashboard
+            </Link>
+          )}
           <Link href="events" className="mr-5 hover:text-gray-900">
             Events
           </Link>

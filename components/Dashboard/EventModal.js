@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { createEvent, updateEvent } from "@/services/api";
 import { closeModal, updateModalData } from "@/store/slices/modalSlice";
 
-function EventModal({ showModal, setShowModal }) {
+function EventModal() {
   const dispatch = useDispatch();
   const { isOpen, operationType, modalData } = useSelector(
     (state) => state.modal
@@ -67,6 +67,8 @@ function EventModal({ showModal, setShowModal }) {
       })
     );
   };
+
+  console.log("EVENT MODAL DATA", modalData);
 
   return (
     <>

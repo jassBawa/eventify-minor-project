@@ -18,11 +18,19 @@ function LandingHero() {
             college events, all in one easy-to-use platform.
           </p>
           <div className="flex justify-center gap-4">
-            <Link
-              href="/events"
-              className="text-white w-full flex justify-center items-center py-2 bg-indigo-500 border-0 px-4 text-center  focus:outline-none hover:bg-indigo-600 rounded"
-            >
-              View All
+            <Link href="/events" className="btn btn-primary">
+              <svg
+                className="h-5 w-5 mr-2"
+                viewBox="0 0 25 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22.125 3.125H20.75V0.375H18V3.125H7V0.375H4.25V3.125H2.875C2.14565 3.125 1.44618 3.41473 0.930456 3.93046C0.414731 4.44618 0.125 5.14565 0.125 5.875V25.125C0.125 25.8543 0.414731 26.5538 0.930456 27.0695C1.44618 27.5853 2.14565 27.875 2.875 27.875H22.125C23.6513 27.875 24.875 26.6513 24.875 25.125V5.875C24.875 5.14565 24.5853 4.44618 24.0695 3.93046C23.5538 3.41473 22.8543 3.125 22.125 3.125ZM22.125 25.125H2.875V11.375H22.125V25.125ZM22.125 8.625H2.875V5.875H22.125V8.625Z"
+                  fill="#CCCCCC"
+                />
+              </svg>
+              All Events
             </Link>
             <Link
               href="/about"
@@ -55,7 +63,7 @@ function LandingHero() {
             animate={{ opacity: 1, scale: 1 }}
             className="absolute z-10 -bottom-16 left-24 h-56 w-56 object-cover object-center border-2 border-white rounded-full hover:scale-105 transition-all outline hover:outline-[.4rem] hover:z-20 hover:outline-offset-4 hover:outline-indigo-500"
             alt="hero"
-            src="https://cityspideynews.s3.amazonaws.com/uploads/spidey/202110/bhangra-cover-(wikimedia)-1634646199.png"
+            src="/bhangra.jpeg"
           />
         </div>
       </div>

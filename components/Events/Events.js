@@ -1,4 +1,5 @@
 import React from "react";
+import EventCard from "./EventCard";
 import Event from "./Event";
 
 function Events({ events }) {
@@ -34,7 +35,8 @@ function Events({ events }) {
           <h2 className="text-3xl font-semibold">Upcoming Events</h2>
           <div className="mt-8 grid grid-cols-4 gap-8 text-center -m-4">
             {upcomingEvents.map((event) => (
-              <Event key={event._id} event={event} />
+              // <Event key={event._id} event={event} />
+              <EventCard key={event._id} event={event} />
             ))}
           </div>
         </section>
@@ -45,7 +47,8 @@ function Events({ events }) {
           <h2 className="text-3xl font-semibold">Ongoing Events</h2>
           <div className="mt-8 grid grid-cols-4 gap-8 text-center -m-4">
             {ongoingEvents.map((event) => (
-              <Event key={event.title} event={event} />
+              // <Event key={event._id} event={event} />
+              <EventCard key={event._id} event={event} />
             ))}
           </div>
         </section>
@@ -56,7 +59,8 @@ function Events({ events }) {
           <h2 className="text-3xl font-semibold">Past Events</h2>
           <div className="mt-8 grid grid-cols-4 gap-8 text-center -m-4">
             {pastEvents.map((event) => (
-              <Event key={event.title} event={event} isDisabled={true} />
+              // <Event key={event._id} event={event} isDisabled={true} />
+              <EventCard key={event._id} event={event} badge="OLD" isDisabled />
             ))}
           </div>
         </section>

@@ -23,7 +23,7 @@ function validate(formData) {
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [erros, setErrors] = useState({});
+  // const [erros, setErrors] = useState({});
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -39,7 +39,11 @@ function LoginForm() {
       toast.success("Logged In");
       localStorage.setItem("accessToken", res.token);
       dispatch(
-        setAdminData({ name: res.name, email: res.email, loggedIn: true })
+        setAdminData({
+          societyName: res.data.society_name,
+          loggedIn: true,
+          token: res.token,
+        })
       );
 
       router.push("/dashboard");

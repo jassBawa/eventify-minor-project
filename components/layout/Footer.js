@@ -60,9 +60,15 @@ function Footer() {
               </h2>
               <nav className="list-none space-y-1 mb-10">
                 <li>
-                  <a className="text-gray-200 hover:text-gray-400">
+                  <Link
+                    href={{
+                      pathname: "/64a11df3949d6783958fee31",
+                      query: { name: "Cultural Commmittee" },
+                    }}
+                    className="text-gray-200 hover:text-gray-400"
+                  >
                     Cultural Committe
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a className="text-gray-200 hover:text-gray-400">

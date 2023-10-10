@@ -3,7 +3,10 @@ import { store } from "@/store/store";
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +27,9 @@ export default function App({ Component, pageProps }) {
       {!isLoading && (
         <Provider store={store}>
           <Toaster />
-          <Component {...pageProps} />
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
         </Provider>
       )}
     </>
