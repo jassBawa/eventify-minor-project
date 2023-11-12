@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import EventModal from "@/components/Dashboard/EventModal";
 import EventsList from "@/components/Dashboard/EventsList";
@@ -21,12 +21,11 @@ function Dashboard() {
   );
 
   return (
-    <div className="bg-gray-100">
-      <Head></Head>
-      <div className="bg-gray-100 h-full">
+    <>
+      <div className="relative first:bg-g ray-100 h-full">
         <Navbar />
 
-        <main className="h-full bg-gray-100">
+        <main className=" h-full bg-gray-100">
           <EventModal />
 
           <div className="container mx-auto py-6 px-4 mt-8">
@@ -50,7 +49,7 @@ function Dashboard() {
           </div>
         </main>
       </div>
-    </div>
+    </>
   );
 }
 

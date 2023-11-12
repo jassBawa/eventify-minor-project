@@ -13,6 +13,7 @@ const modalSlice = createSlice({
       time: "",
       venue: "",
       eventId: "",
+      category: "",
     },
   },
   reducers: {

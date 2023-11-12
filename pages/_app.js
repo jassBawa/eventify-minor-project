@@ -1,10 +1,11 @@
 import Loader from "@/components/layout/Loader";
-import { store } from "@/store/store";
+import { persistor, store } from "@/store/store";
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const queryClient = new QueryClient();
 
@@ -26,10 +27,12 @@ export default function App({ Component, pageProps }) {
       {isLoading && <Loader />}
       {!isLoading && (
         <Provider store={store}>
-          <Toaster />
-          <QueryClientProvider client={queryClient}>
-            <Component {...pageProps} />
-          </QueryClientProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <Toaster />
+            <QueryClientProvider client={queryClient}>
+              <Component {...pageProps} />
+            </QueryClientProvider>
+          </PersistGate>
         </Provider>
       )}
     </>

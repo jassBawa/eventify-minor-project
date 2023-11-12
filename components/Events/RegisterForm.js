@@ -11,16 +11,17 @@ function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [year, setYear] = useState("");
-  const [branch, setBranch] = useState("");
+  const [year, setYear] = useState("2");
+  const [branch, setBranch] = useState("EE");
   const [section, setSection] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = { name, email, phone: +phone, year, branch, section };
-    const res = await registerEvent(eventId, data);
-    console.log(res);
+    console.log(data);
+    // const res = await registerEvent(eventId, data);
+    // console.log(res);
     toast.success("Registered Successfully!");
   };
 
@@ -83,32 +84,41 @@ function RegisterForm() {
             <label htmlFor="year" className="leading-7 text-sm text-gray-600">
               Year
             </label>
-            <input
-              type="text"
-              required
+            <select
               id="year"
               name="year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              placeholder="1stj"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
+              className="w-full py-2 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            >
+              <option value="1">1st</option>
+              <option value="2">2nd</option>
+              <option value="3">3rd</option>
+              <option value="4">4th</option>
+            </select>
           </div>
 
           <div className="relative">
             <label htmlFor="branch" className="leading-7 text-sm text-gray-600">
               Branch
             </label>
-            <input
-              type="text"
-              required
+            <select
               id="branch"
               name="branch"
               value={branch}
               onChange={(e) => setBranch(e.target.value)}
-              placeholder="CSE"
-              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
+              className="w-full py-2 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            >
+              <option value="CSE">CSE</option>
+              <option value="IT">IT</option>
+              <option value="CE">CE</option>
+              <option value="EE">EE</option>
+              <option value="ME">ME</option>
+              <option value="ECE">ECE</option>
+              <option value="CA">CA</option>
+              <option value="BA">BA</option>
+              <option value="Mtech">Mtech</option>
+            </select>
           </div>
           <div className="relative">
             <label

@@ -22,7 +22,6 @@ export function PieChart({ labels, dataset }) {
   };
   return (
     <>
-      <h3>Year Wise Distribution</h3>
       <Pie data={data} className=" bg-white shadow-sm py-4 px-6" />
     </>
   );

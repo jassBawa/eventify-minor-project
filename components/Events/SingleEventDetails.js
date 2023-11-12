@@ -14,7 +14,9 @@ function SingleEventDetails({ event }) {
           <div className="left">
             <div className="heading">
               <h5 className=" text-yellow-500 tracking-widest">Event Name</h5>
-              <h1 className="text-4xl text-white mt-1">{event.eventName}</h1>
+              <h1 className="text-6xl font-semibold text-white mt-1">
+                {event.eventName}
+              </h1>
             </div>
             <div className=" mt-8 relative bg-[#363636] border-2 border-indigo-500 drop-shadow-lg rounded-3xl">
               {/* <div className="h-full w-full absolute bg-black/40 rounded-3xl" /> */}
@@ -22,27 +24,27 @@ function SingleEventDetails({ event }) {
                 <h3 className="text-2xl text-gray-300">Event Details</h3>
                 <div className="card__items text-white grid grid-cols-2 w-full gap-4 mt-6">
                   <div className="item__group flex gap-4 items-center">
-                    <CalendarIcon className="h-5 w-5" />
+                    <CalendarIcon className="h-5 w-5 text-yellow-500" />
                     <span className="item__placeholder opacity-60">
                       {formattedDate}
                     </span>
                   </div>
                   <div className="item__group flex gap-4 items-center">
-                    <ClockIcon className="h-5 w-5" />
+                    <ClockIcon className="h-5 w-5 text-yellow-500" />
                     <span className="item__placeholder opacity-60">
                       {event.time + " PM"}
                     </span>
                   </div>
                   <div className="item__group  flex gap-4 items-center">
-                    <GlobeIcon className="h-5 w-5" />
+                    <GlobeIcon className="h-5 w-5 text-yellow-500" />
                     <span className="item__placeholder opacity-60">
                       {event.venue}
                     </span>
                   </div>
                   <div className="item__group flex gap-4 items-center">
-                    <TagIcon className="h-5 w-5" />
+                    <TagIcon className="h-5 w-5 text-yellow-500" />
                     <span className="item__placeholder opacity-60">
-                      {event.category}
+                      {event.societyName}
                     </span>
                   </div>
                 </div>

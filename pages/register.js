@@ -1,11 +1,12 @@
+import React, { useEffect } from "react";
 import LoginForm from "@/components/shared/LoginForm";
 import Navbar from "@/components/layout/Navbar";
 import Head from "next/head";
-import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import RegisterForm from "@/components/shared/RegisterForm";
 
-function Login() {
+function Register() {
   const router = useRouter();
   const token = useSelector((state) => state.user.token);
 
@@ -20,10 +21,10 @@ function Login() {
       </Head>
       <main>
         <Navbar />
-        <LoginForm />
+        <RegisterForm />
       </main>
     </>
   );
 }
 
-export default Login;
+export default Register;

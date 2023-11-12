@@ -1,12 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import EventTable from "./EventTable";
 import { useDispatch } from "react-redux";
-import {} from "@/services/api";
+import { deleteEvent } from "@/services/api";
 import { FilterIcon } from "@/assets/Icons";
 import { openModal } from "@/store/slices/modalSlice";
+import DeleteModal from "../shared/DeleteModal";
+import toast from "react-hot-toast";
 
 function EventsList({ events }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteId, setDeleteId] = React.useState(null); // TODO: remove
+  const [deleteModal, setDeleteModal] = React.useState(false);
+
   //   const { isOpen, operationType, modalData } = useSelector(
   //     (state) => state.modal
   //   );
@@ -25,8 +30,34 @@ function EventsList({ events }) {
     );
   }, [events, searchQuery]);
 
+  const handleDelete = async (eventId) => {
+    console.log("running delete functions");
+    const token = localStorage.getItem("accessToken");
+    try {
+      const response = await deleteEvent(eventId, token);
+      if (response) {
+        toast.success("Event deleted");
+      }
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+
+    setDeleteModal(false);
+  };
+
   return (
     <>
+      {deleteModal && (
+        <>
+          {/* <div className="absolute top-0 left-0 h-screen overscroll-contain w-full bg-black/80"></div> */}
+          <DeleteModal
+            setDeleteModal={setDeleteModal}
+            handleSubmit={handleDelete}
+            deleteId={deleteId}
+          />
+        </>
+      )}
+
       <div className="flex justify-between items-center mt-8">
         <div className="w-[50%]">
           <input
@@ -55,6 +86,12 @@ function EventsList({ events }) {
             <option value="name">Name</option>
             <option value="date">Date</option>
           </select> */}
+          {/* <button
+            className="btn"
+            onClick={() => document.getElementById("my_modal_2").showModal()}
+          >
+            Create
+          </button> */}
           <button
             onClick={() =>
               dispatch(
@@ -72,7 +109,12 @@ function EventsList({ events }) {
       </div>
       <div className="mt-4">
         <div className="shadow py-2 overflow-hidden rounded-lg border-b border-gray-200">
-          <EventTable filterList={filterList} />
+          <EventTable
+            setDeleteId={setDeleteId}
+            filterList={filterList}
+            deleteModal={deleteModal}
+            setDeleteModal={setDeleteModal}
+          />
         </div>
       </div>
     </>

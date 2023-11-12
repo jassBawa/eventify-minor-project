@@ -1,8 +1,11 @@
+import { store } from "@/store/store";
 import axios from "./axios";
+import { headers } from "next/dist/client/components/headers";
 
 // const BASE_URL = "http://localhost:4040/api"
 
-const adminLoginUrl = "/admin/login";
+const userLoginUrl = "/admin/login";
+const userRegisterUrl = "/admin/register";
 const createEventUrl = "/user/event";
 const getAdminEventsUrl = "/user/events";
 const getAllEventsUrl = "/user/event";
@@ -10,17 +13,31 @@ const getSingleEventUrl = "/user/event/";
 const updateEventUrl = "/user/event/";
 const deleteEventUrl = "/user/event/";
 
-// ----------------------------- Admin Events -----------------------------
+const state = store.getState();
 
-export const adminLogin = async (loginParams) => {
+// ----------------------------- AUTHENTICATION ------------------------------------
+
+export const userLogin = async (loginParams) => {
   try {
-    const res = await axios.post(adminLoginUrl, loginParams);
+    const res = await axios.post(userLoginUrl, loginParams);
     const data = res.data;
     return data;
   } catch (err) {
     console.log(err);
   }
 };
+
+export const userRegister = async (registerParams) => {
+  try {
+    const res = await axios.post(userRegisterUrl, registerParams);
+    const data = res.data;
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// ----------------------------- Admin Events -----------------------------
 
 export const createEvent = async (createEventParams) => {
   const token = localStorage.getItem("accessToken");
@@ -88,13 +105,18 @@ export const deleteEvent = async (eventId, apiHeaders) => {
   return data;
 };
 
-// ----------------------------- PUBLIC EVENTS -----------------------------
+// ----------------------------- USER EVENTS -----------------------------
 
 // to register for event
 export const registerEvent = async (url, registerEventParams) => {
   const res = await axios.post(
     `http://localhost:4040/api/event/register/` + url,
-    registerEventParams
+    registerEventParams,
+    {
+      headers: {
+        Authorization: `Bearer ` + state.user.token,
+      },
+    }
   );
   const data = res.data;
 
@@ -121,7 +143,11 @@ export const getAllEvents = async () => {
 
 // to get a single event
 export const getSingleEvent = async (eventId) => {
-  const res = await axios.get(getSingleEventUrl + eventId);
+  const res = await axios.get(getSingleEventUrl + eventId, {
+    headers: {
+      Authorization: `Bearer ` + state.user.token,
+    },
+  });
   const data = res.data;
 
   return data;
@@ -136,6 +162,25 @@ export const giveFeedback = async (feedbackParams) => {
   } catch (error) {
     // Handle the error
     console.error("Error giving feedback:", error);
+    throw error;
+  }
+};
+
+export const getRegistrationByUserID = async () => {
+  try {
+    const res = await axios.get(
+      "http://localhost:4040/api/event/registrations",
+      {
+        headers: {
+          Authorization: "Bearer " + state.user.token,
+        },
+      }
+    );
+    const data = res.data;
+    return data;
+  } catch (error) {
+    // Handle the error
+    console.error("Error fetching events:", error);
     throw error;
   }
 };

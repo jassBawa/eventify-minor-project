@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
@@ -10,6 +10,7 @@ function EventModal() {
   const { isOpen, operationType, modalData } = useSelector(
     (state) => state.modal
   );
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClose = () => {
@@ -27,6 +28,7 @@ function EventModal() {
       date: modalData.date,
       time: modalData.time,
       venue: modalData.venue,
+      category: modalData.category,
     };
 
     const res = await updateEvent(modalData.eventId, updatedData);
@@ -44,6 +46,8 @@ function EventModal() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    console.log(modalData);
+
     const res = await createEvent({
       eventName: modalData.eventName,
       description: modalData.description,
@@ -51,7 +55,10 @@ function EventModal() {
       date: modalData.date,
       time: modalData.time,
       venue: modalData.venue,
+      category: modalData.category,
     });
+
+    console.log(res);
 
     toast.success("Event added");
 
@@ -68,22 +75,26 @@ function EventModal() {
     );
   };
 
-  console.log("EVENT MODAL DATA", modalData);
+  useEffect(() => {
+    setIsSubmitting(false);
+  }, [isOpen]);
+
+  console.log("EVENT MODAL ");
 
   return (
     <>
       {isOpen ? (
         <div
           id="create-event-modal"
-          className="modal z-50 fixed w-full py-4 top-0 left-0 flex items-center justify-center"
+          className=" z-50 h-full fixed w-full py-4 top-0 left-0 flex items-center justify-center"
         >
           <div
             onClick={handleClose}
             className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
           ></div>
 
-          <div className="modal-container bg-white md:max-w-3xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div className="modal-content py-4 text-left px-6">
+          <div className="modal-container bg-white md:max-w-3xl h-[38rem] mx-auto rounded shadow-lg z-50  overflow-y-auto">
+            <div className="modal-content py-4 text-left px-6 ">
               <div className="headings py-4">
                 <h2 className="text-2xl ">
                   {operationType === "CREATE"
@@ -115,7 +126,29 @@ function EventModal() {
                     onChange={handleChange}
                   />
                 </div>
-
+                <div className="">
+                  <label
+                    className="block font-semibold mb-2"
+                    htmlFor="event-category"
+                  >
+                    Category
+                  </label>
+                  <select
+                    name="category"
+                    id="event-category"
+                    className="w-full border rounded py-2 px-3 mb-3"
+                    value={modalData.category}
+                    onChange={handleChange}
+                  >
+                    <option value="dance">Dance</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="music">Music</option>
+                    <option value="technical">Technical</option>
+                    <option value="sports">Sports</option>
+                    <option value="fine arts">Fine Arts</option>
+                    <option value="others">Others</option>
+                  </select>
+                </div>
                 <div className="">
                   <label
                     className="block font-semibold mb-2"
@@ -215,7 +248,7 @@ function EventModal() {
                     disabled={isSubmitting}
                   >
                     {isSubmitting
-                      ? "Submitting..."
+                      ? "Creating..."
                       : operationType === "CREATE"
                       ? "Create"
                       : "Update"}

@@ -1,9 +1,13 @@
 import { TailBlocksIcon } from "@/assets/Icons";
+import { setLoggedOut } from "@/store/slices/adminSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar({ classes = "" }) {
+  const dispatch = useDispatch();
+  const isAdmin = useSelector((state) => state.user.isAdmin);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -12,6 +16,7 @@ function Navbar({ classes = "" }) {
   }, []);
 
   const handleLogout = () => {
+    dispatch(setLoggedOut());
     localStorage.removeItem("accessToken");
     router.push("/");
   };
@@ -31,9 +36,13 @@ function Navbar({ classes = "" }) {
           <Link href="/" className="mr-5 hover:text-gray-900">
             Home
           </Link>
-          {isLoggedIn && (
+          {isAdmin ? (
             <Link href={"/dashboard"} className="mr-5 hover:text-gray-900">
               Dashboard
+            </Link>
+          ) : (
+            <Link href={"/profile"} className="mr-5 hover:text-gray-900">
+              Profile
             </Link>
           )}
           <Link href="events" className="mr-5 hover:text-gray-900">

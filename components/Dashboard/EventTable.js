@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 const exportType = "csv";
 
-function EventTable({ filterList }) {
+function EventTable({ deleteModal, setDeleteModal, filterList, setDeleteId }) {
   const dispatch = useDispatch();
 
   const handleDownload = async (eventId) => {
@@ -21,20 +21,10 @@ function EventTable({ filterList }) {
   };
 
   // TODO --> remove localstorage
-  const handleDelete = async (eventId) => {
-    const token = localStorage.getItem("accessToken");
-    try {
-      const response = await deleteEvent(eventId, token);
-      if (response) {
-        toast.success("Event deleted");
-      }
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
 
   const handleEdit = async (eventId) => {
     const event = filterList.find((event) => event._id === eventId);
+    console.log("evevnt", event);
     dispatch(
       openModal({
         operationType: "UPDATE",
@@ -46,6 +36,7 @@ function EventTable({ filterList }) {
           time: event.time,
           venue: event.venue,
           eventId: event._id,
+          category: event.category,
         },
       })
     );
@@ -126,7 +117,7 @@ function EventTable({ filterList }) {
                 </button>
               </td>
               <td className="">
-                {/* <button
+                <button
                   href="#"
                   className="ml-4 text-gray-600 hover:text-indigo-900"
                   onClick={() => handleEdit(event._id)}
@@ -142,11 +133,16 @@ function EventTable({ filterList }) {
                       fill="#3C3C3C"
                     />
                   </svg>
-                </button> */}
+                </button>
                 <button
-                  href="#"
-                  className="ml-8 text-red-600 hover:text-indigo-900"
-                  onClick={() => handleDelete(event._id)}
+                  className=" pl-4 "
+                  //                   onClick={() =>
+                  // console.log('object');
+                  //                   }
+                  onClick={() => {
+                    setDeleteId(event._id);
+                    setDeleteModal(true);
+                  }}
                 >
                   <svg
                     className="w-5 h-5"
@@ -160,6 +156,7 @@ function EventTable({ filterList }) {
                     />
                   </svg>
                 </button>
+
                 {/* <a href="#" className="text-red-600 hover:text-red-900 ml-2">Delete</a> */}
               </td>
             </tr>

@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const adminSlice = createSlice({
+const userSlice = createSlice({
   name: "admin",
   initialState: {
-    societyName: "",
     token: "",
+    name: "",
+    isAdmin: false,
     isLoggedIn: false,
   },
   reducers: {
-    setAdminData: (state, action) => {
-      state.societyName = action.payload.societyName;
+    setUserData: (state, action) => {
+      state.name = action.payload.name;
       state.token = action.payload.token;
+      state.isAdmin = action.payload.isAdmin;
       state.isLoggedIn = action.payload.loggedIn;
     },
     setLoggedOut: (state) => {
-      state.societyName = "";
       state.token = "";
       state.isLoggedIn = false;
+      state.name = "";
     },
   },
 });
 
-export const { setAdminData, setLoggedIn } = adminSlice.actions;
-export default adminSlice.reducer;
+export const { setUserData, setLoggedOut } = userSlice.actions;
+export default userSlice.reducer;
