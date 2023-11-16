@@ -131,3 +131,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cert-body {
+  font-family: Arial, sans-serif;
+}
+
+.certificate {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cert-header {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.cert-content {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.cert-footer {
+  text-align: center;
+  padding: 20px 0;
+}

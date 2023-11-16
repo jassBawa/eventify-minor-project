@@ -126,7 +126,12 @@ export const registerEvent = async (url, registerEventParams) => {
 // to get details of registered users
 export const getRegisteredUsers = async (url) => {
   const res = await axios.get(
-    "http://localhost:4040/api/event/register/" + url
+    "http://localhost:4040/api/event/register/" + url,
+    {
+      headers: {
+        Authorization: "Bearer " + state.user.token,
+      },
+    }
   );
   const data = res.data;
 
@@ -170,6 +175,28 @@ export const getRegistrationByUserID = async () => {
   try {
     const res = await axios.get(
       "http://localhost:4040/api/event/registrations",
+      {
+        headers: {
+          Authorization: "Bearer " + state.user.token,
+        },
+      }
+    );
+    const data = res.data;
+    return data;
+  } catch (error) {
+    // Handle the error
+    console.error("Error fetching events:", error);
+    throw error;
+  }
+};
+
+export const updateCertificateDetails = async (id, certified) => {
+  try {
+    const res = await axios.put(
+      "http://localhost:4040/api/event/register/" + id,
+      {
+        isCertified: certified,
+      },
       {
         headers: {
           Authorization: "Bearer " + state.user.token,

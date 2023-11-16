@@ -1,13 +1,29 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import Certificate from "@/components/shared/Certificate";
 import { getRegistrationByUserID } from "@/services/api";
+import html2canvas from "html2canvas";
 import Head from "next/head";
+import { saveAs } from "file-saver";
+
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { formatDate } from "@/utils/date-formatters";
 
 function Profile() {
   const [events, setEvents] = useState([]);
   const user = useSelector((state) => state.user);
+  const [certData, setCertData] = useState({});
+
+  const convertToPdf = async () => {
+    // converting into canvas
+    const canvas = await html2canvas(
+      document.querySelector("#user-certificate")
+    );
+    canvas.toBlob((blob) => {
+      saveAs(blob, `${certData.name}-certificate.png`);
+    });
+  };
 
   useEffect(() => {
     const fetch = async () => {
@@ -20,7 +36,23 @@ function Profile() {
 
   if (!events) return;
 
-  console.log(events);
+  // const handleDownload = (event) => {};
+
+  const handleDownload = (event) => {
+    const formattedDate = formatDate(event.event_id.date);
+
+    const updatedCertData = {
+      name: event.name,
+      date: formattedDate,
+      eventName: event.event_id.eventName,
+      societyName: event.event_id.societyName,
+    };
+
+    setCertData(() => updatedCertData);
+    setTimeout(() => {
+      convertToPdf();
+    }, 1000);
+  };
 
   return (
     <>
@@ -55,15 +87,19 @@ function Profile() {
               <tbody className="text-md">
                 {events?.map((event, index) => {
                   const { event_id } = event;
+                  if (!event_id) return null;
                   return (
                     <>
-                      <tr>
+                      <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{event_id.eventName}</td>
+                        <td>{event_id?.eventName}</td>
                         <td>{event_id.societyName}</td>
                         <td>
                           {event.isCertified ? (
-                            <button className="bg-blue-500 py-2 px-4 rounded text-white">
+                            <button
+                              onClick={() => handleDownload(event)}
+                              className="bg-blue-500 py-2 px-4 rounded text-white"
+                            >
                               Download Certificate
                             </button>
                           ) : (
@@ -79,6 +115,10 @@ function Profile() {
           </div>
         </div>
       </main>
+
+      <div className="opacity-0 absolute top-0 -z-20">
+        <Certificate {...certData} />
+      </div>
 
       <Footer />
     </>

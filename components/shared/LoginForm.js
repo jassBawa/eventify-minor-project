@@ -49,7 +49,7 @@ function LoginForm() {
         })
       );
 
-      router.push("/home");
+      router.push("/");
     } else {
       toast.error("Something went wrong");
     }

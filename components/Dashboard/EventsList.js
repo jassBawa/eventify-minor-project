@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import EventTable from "./EventTable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteEvent } from "@/services/api";
 import { FilterIcon } from "@/assets/Icons";
 import { openModal } from "@/store/slices/modalSlice";
@@ -11,6 +11,7 @@ function EventsList({ events }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteId, setDeleteId] = React.useState(null); // TODO: remove
   const [deleteModal, setDeleteModal] = React.useState(false);
+  const token = useSelector((state) => state.user.token);
 
   //   const { isOpen, operationType, modalData } = useSelector(
   //     (state) => state.modal
@@ -32,7 +33,6 @@ function EventsList({ events }) {
 
   const handleDelete = async (eventId) => {
     console.log("running delete functions");
-    const token = localStorage.getItem("accessToken");
     try {
       const response = await deleteEvent(eventId, token);
       if (response) {
@@ -69,29 +69,6 @@ function EventsList({ events }) {
           />
         </div>
         <div className="w-1/3 text-right flex gap-4 justify-end">
-          {/* <button
-            className="bg-blue-500 mr-4 text-white px-4 py-2 rounded-lg"
-            onClick={fetchEvents}
-          >
-            Refresh
-          </button> */}
-          {/* <label
-            htmlFor="filter"
-            className="flex items-center rounded gap-2 py-2 px-4 bg-gray-300"
-          >
-            Filter
-            <FilterIcon className="h-5 w-5" />
-          </label> */}
-          {/* <select className="" id="filter">
-            <option value="name">Name</option>
-            <option value="date">Date</option>
-          </select> */}
-          {/* <button
-            className="btn"
-            onClick={() => document.getElementById("my_modal_2").showModal()}
-          >
-            Create
-          </button> */}
           <button
             onClick={() =>
               dispatch(

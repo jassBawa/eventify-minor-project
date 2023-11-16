@@ -33,7 +33,7 @@ function LandingHero() {
               All Events
             </Link>
             <Link
-              href="/about"
+              href="/about-us"
               className="ml-4 text-gray-700 transition-all border-b-2 border-gray-100 text-sm flex justify-center items-center border-transparent border-b-2 hover:border-blue-300  px-4 focus:outline-none"
             >
               More!

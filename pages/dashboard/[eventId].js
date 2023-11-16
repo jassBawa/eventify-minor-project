@@ -2,7 +2,7 @@ import { RegistrationIcon } from "@/assets/Icons";
 import { PieChart } from "@/components/Dashboard/PieChart";
 import VerticalBarChart from "@/components/Dashboard/VerticalBarChart";
 import Navbar from "@/components/layout/Navbar";
-import { getSingleAdminEvent } from "@/services/api";
+import { getSingleAdminEvent, updateCertificateDetails } from "@/services/api";
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ function EventPage() {
 
   const fetchEvent = async () => {
     const data = await getSingleAdminEvent({ eventId, token });
-    setEvent(data);
+    setEvent(data[0]);
 
     //
     const branchData = await axios.get(
@@ -86,6 +86,32 @@ function EventPage() {
 
   if (!users) return null;
 
+  const handleToggle = async (eventId, previousVal) => {
+    const id = eventId.event_id + "/" + eventId.user_id;
+
+    const userIndex = users.findIndex(
+      (user) => user.user_id === eventId.user_id
+    );
+
+    console.log("userIndex", userIndex);
+
+    // If the user is found, update the isCertified field
+    if (userIndex !== -1) {
+      const updatedUsers = [...users];
+      updatedUsers[userIndex] = {
+        ...updatedUsers[userIndex],
+        isCertified: !updatedUsers[userIndex].isCertified,
+      };
+
+      // Update the state with the modified user array
+      setUsers(updatedUsers);
+
+      // Make your API call to update the server data
+      // await updateCertificateDetails(userId, !updatedUsers[userIndex].isCertified);
+      const res = await updateCertificateDetails(id, !previousVal);
+    }
+  };
+
   return (
     <>
       <div className="bg-gray-100">
@@ -97,7 +123,7 @@ function EventPage() {
             {/* Details */}
             <section className="relative flex  justify-between container mx-auto mt-8">
               <div className="event__container">
-                <img src={event.image} alt="" className="h-32" />
+                <img src={event?.image} alt="" className="h-32" />
                 <div className="py-6">
                   <h1 className="text-3xl font-bold text-gray-800 mb-2">
                     {event.eventName} Event
@@ -111,7 +137,7 @@ function EventPage() {
                 <RegistrationIcon className="h-20 w-20 absolute right-10" />
                 <h4 className="">Total Registrations</h4>
                 <p className="card__data mt-2 text-6xl text-white">
-                  {/* {event.noOfRegistration} */}8
+                  {event.noOfRegistration}
                 </p>
                 <p className="bottom__text mt-6">{event.category}</p>
               </div>
@@ -142,11 +168,13 @@ function EventPage() {
 
                   <thead>
                     <tr>
-                      <th class="border border-slate-300 ...">S. No.</th>
-                      <th class="border border-slate-300 ...">Name</th>
-                      <th class="border border-slate-300 ...">Email</th>
-                      <th class="border border-slate-300 ...">Branch</th>
-                      <th class="border border-slate-300 ...">Certification</th>
+                      <th className="border border-slate-300 ...">S. No.</th>
+                      <th className="border border-slate-300 ...">Name</th>
+                      <th className="border border-slate-300 ...">Email</th>
+                      <th className="border border-slate-300 ...">Branch</th>
+                      <th className="border border-slate-300 ...">
+                        Certification
+                      </th>
                     </tr>
                   </thead>
 
@@ -168,7 +196,14 @@ function EventPage() {
                               {user.branch}
                             </td>
                             <td className="border border-slate-300 text-center py-2">
-                              {user.isCertified ? "YES" : " NO"}{" "}
+                              <input
+                                type="checkbox"
+                                className="toggle toggle-success"
+                                checked={user.isCertified}
+                                onChange={() =>
+                                  handleToggle(user, user.isCertified)
+                                }
+                              />
                             </td>
                           </tr>
                         </>
