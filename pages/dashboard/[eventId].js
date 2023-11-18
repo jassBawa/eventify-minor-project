@@ -123,14 +123,20 @@ function EventPage() {
 
           <main className="h-full bg-gray-100 py-6 px-16 ">
             {/* Details */}
-            <section className="relative flex  justify-between container mx-auto mt-8">
-              <div className="event__container">
-                <img src={event?.image} alt="" className="h-32" />
+            <section className="relative flex flex-col gap-12  justify-between container mx-auto mt-8">
+              <div className="event__container flex gap-4">
+                <img src={event?.image} alt="" className="h-48" />
                 <div className="py-6">
                   <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                    {event.eventName} Event
+                    {event.eventName}
                   </h1>
-                  <p className="text-gray-400 w-3/4">{event.description}</p>
+                  <p className="text-gray-400 w-3/4">
+                    {event.description}
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
+                    porro cum neque dolore eos distinctio, natus eligendi facere
+                    deleniti magni fuga consequuntur! Ea, dolorum omnis officiis
+                    quia quisquam nobis ex.
+                  </p>
                 </div>
               </div>
               <div
@@ -209,7 +215,11 @@ function EventPage() {
                       </th>
                     </tr>
                   </thead>
-
+                  {!users?.length > 0 ? (
+                    <h1 className="text-2xl my-2 font-semibold">
+                      No one has registred for this event yet.
+                    </h1>
+                  ) : null}
                   <tbody>
                     {users?.map((user, i) => {
                       return (

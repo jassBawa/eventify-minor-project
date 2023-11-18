@@ -9,10 +9,11 @@ import { formatDate } from "@/utils/date-formatters";
 import { deleteEvent, getRegisteredUsers } from "@/services/api";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { openDeleteModal } from "@/store/slices/deleteModalSlice";
 
 const exportType = "csv";
 
-function EventTable({ deleteModal, setDeleteModal, filterList, setDeleteId }) {
+function EventTable({ filterList, setDeleteId }) {
   const dispatch = useDispatch();
 
   const handleDownload = async (eventId) => {
@@ -41,56 +42,79 @@ function EventTable({ deleteModal, setDeleteModal, filterList, setDeleteId }) {
       })
     );
   };
+  console.log(filterList);
+
+  // const testList = filterList.sort(
+  //   (a, b) => new Date(b.date) - new Date(a.date)
+  // );
+
+  // console.log(testList);
+
+  if (!filterList.length) {
+    return (
+      <h1 className="text-4xl font-semibold">Create your first event now</h1>
+    );
+  }
 
   return (
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-50">
-        <tr>
+    <table className="min-w-full rounded-xl overflow-hidden shadow-md table outline-blue-200 divide-y  w-full divide-gray-200">
+      <thead className="bg-gray-50 w-full">
+        {/* table header */}
+        <tr className="bg-gray-600 border-white border text-white font-semibold text-base w-full ">
           <th
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            className="px-6 py-3 text-left uppercase tracking-wider"
+          >
+            S. No.
+          </th>
+          <th
+            scope="col"
+            className="px-6 py-3 text-left uppercase tracking-wider"
           >
             Name
           </th>
           <th
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            className="px-6 py-3 text-left uppercase tracking-wider"
           >
             Venue
           </th>
           <th
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            className="px-6 py-3 text-left uppercase tracking-wider"
           >
             Date
           </th>
           <th
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            className="px-6 py-3 text-left uppercase tracking-wider"
           >
             Response
           </th>
           <th
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            className="px-6 py-3 text-left uppercase tracking-wider"
           >
             Actions
           </th>
         </tr>
       </thead>
+      {/* table body */}
       <tbody className="bg-white divide-y divide-gray-200">
         {filterList.map((event, _i) => {
+          console.log("filterlist is re runned");
           const formattedDate = formatDate(event.date);
 
           return (
             <tr key={_i}>
+              <td className="px-6 py-4 whitespace-nowrap">{_i + 1}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
                     <img
                       className="h-10 w-10 rounded-full"
                       src={event.image}
-                      alt=""
+                      alt={event.eventName}
                     />
                   </div>
                   <Link
@@ -141,7 +165,7 @@ function EventTable({ deleteModal, setDeleteModal, filterList, setDeleteId }) {
                   //                   }
                   onClick={() => {
                     setDeleteId(event._id);
-                    setDeleteModal(true);
+                    dispatch(openDeleteModal());
                   }}
                 >
                   <svg

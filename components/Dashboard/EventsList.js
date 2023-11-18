@@ -6,16 +6,22 @@ import { FilterIcon } from "@/assets/Icons";
 import { openModal } from "@/store/slices/modalSlice";
 import DeleteModal from "../shared/DeleteModal";
 import toast from "react-hot-toast";
+import { closeDeleteModal } from "@/store/slices/deleteModalSlice";
 
 function EventsList({ events }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteId, setDeleteId] = React.useState(null); // TODO: remove
-  const [deleteModal, setDeleteModal] = React.useState(false);
+  const deleteModal = useSelector(
+    (state) => state.deleteModal.isDeleteModalOpen
+  );
+
   const token = useSelector((state) => state.user.token);
 
   //   const { isOpen, operationType, modalData } = useSelector(
   //     (state) => state.modal
   //   );
+
+  console.log("eventlist page -->", events);
 
   const dispatch = useDispatch();
 
@@ -26,6 +32,7 @@ function EventsList({ events }) {
 
   // TODO: remove
   const filterList = useMemo(() => {
+    console.log("memo runned");
     return events.filter((event) =>
       event.eventName.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -42,19 +49,15 @@ function EventsList({ events }) {
       console.error("Error fetching events:", error);
     }
 
-    setDeleteModal(false);
+    dispatch(closeDeleteModal());
   };
-
+  console.log(deleteModal);
   return (
     <>
       {deleteModal && (
         <>
-          {/* <div className="absolute top-0 left-0 h-full overscroll-contain w-full bg-black/80"></div> */}
-          <DeleteModal
-            setDeleteModal={setDeleteModal}
-            handleSubmit={handleDelete}
-            deleteId={deleteId}
-          />
+          <div className="absolute top-0 z-50 left-0 min-h-full h-[70rem] overscroll-contain w-full bg-black/80"></div>
+          <DeleteModal handleSubmit={handleDelete} deleteId={deleteId} />
         </>
       )}
 
@@ -85,12 +88,11 @@ function EventsList({ events }) {
         </div>
       </div>
       <div className="mt-4">
-        <div className="shadow py-2 overflow-hidden rounded-lg border-b border-gray-200">
+        <div className=" py-2 overflow-hidden rounded-lg ">
           <EventTable
             setDeleteId={setDeleteId}
             filterList={filterList}
             deleteModal={deleteModal}
-            setDeleteModal={setDeleteModal}
           />
         </div>
       </div>

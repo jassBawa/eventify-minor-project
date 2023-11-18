@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import EventModal from "@/components/Dashboard/EventModal";
 import EventsList from "@/components/Dashboard/EventsList";
@@ -8,12 +8,27 @@ import StatsCards from "@/components/shared/StatsCards";
 import requireAuth from "@/components/shared/withAuth";
 import useEvents from "@/hooks/useEvents";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   // const [showModal, setShowModal] = useState(false);
 
+  const token = useSelector((state) => state.user.token);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+      toast.error("Please login first!");
+      return;
+    }
+  }, [token, router]);
+
   const { isOpen } = useSelector((state) => state.modal);
-  const events = useEvents(isOpen);
+  const { isDeleteModalOpen } = useSelector((state) => state.deleteModal);
+
+  const events = useEvents(isOpen, isDeleteModalOpen);
 
   const numberOfTotal = events.reduce(
     (tot, event) => tot + event.noOfRegistration,
@@ -22,7 +37,7 @@ function Dashboard() {
 
   return (
     <>
-      <div className="relative first:bg-g ray-100 h-full">
+      <div className="relative bg-gray-100 h-full">
         <Navbar />
 
         <main className=" h-full bg-gray-100">
