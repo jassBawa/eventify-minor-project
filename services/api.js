@@ -1,6 +1,5 @@
 import { store } from "@/store/store";
 import axios from "./axios";
-import { headers } from "next/dist/client/components/headers";
 
 // const BASE_URL = "http://localhost:4040/api"
 

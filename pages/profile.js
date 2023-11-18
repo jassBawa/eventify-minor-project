@@ -9,12 +9,15 @@ import { saveAs } from "file-saver";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { formatDate } from "@/utils/date-formatters";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 function Profile() {
   const [events, setEvents] = useState([]);
   const user = useSelector((state) => state.user);
   const [certData, setCertData] = useState({});
-
+  const token = useSelector((state) => state.user.token);
+  const router = useRouter();
   const convertToPdf = async () => {
     // converting into canvas
     const canvas = await html2canvas(
@@ -26,13 +29,19 @@ function Profile() {
   };
 
   useEffect(() => {
+    if (!token) {
+      router.push("/login");
+      toast.error("Please login first!");
+      return;
+    }
+
     const fetch = async () => {
       const data = await getRegistrationByUserID();
       setEvents(data);
     };
 
     fetch();
-  }, []);
+  }, [token, router]);
 
   if (!events) return;
 

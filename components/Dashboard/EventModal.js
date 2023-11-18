@@ -79,8 +79,6 @@ function EventModal() {
     setIsSubmitting(false);
   }, [isOpen]);
 
-  console.log("EVENT MODAL ");
-
   return (
     <>
       {isOpen ? (

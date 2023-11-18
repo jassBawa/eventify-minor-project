@@ -3,22 +3,19 @@ import { setLoggedOut } from "@/store/slices/adminSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 function Navbar({ classes = "" }) {
   const dispatch = useDispatch();
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = useSelector((state) => state.user.token);
   const router = useRouter();
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) setIsLoggedIn(true);
-  }, []);
 
   const handleLogout = () => {
-    dispatch(setLoggedOut());
-    localStorage.removeItem("accessToken");
     router.push("/");
+    dispatch(setLoggedOut());
+    toast.success("Successfully logged out!");
   };
   return (
     <header
@@ -52,7 +49,7 @@ function Navbar({ classes = "" }) {
             About Us
           </Link>
         </nav>
-        {!isLoggedIn ? (
+        {!token ? (
           <Link
             href="/login"
             className="inline-flex items-center text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-200 rounded text-base mt-4 md:mt-0"

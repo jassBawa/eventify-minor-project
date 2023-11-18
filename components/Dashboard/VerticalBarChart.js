@@ -33,7 +33,6 @@ export const options = {
 };
 
 function VerticalBarChart({ labels, dataset }) {
-  console.log(labels, dataset);
   const data = {
     labels: labels,
     datasets: [

@@ -1,6 +1,7 @@
 import { RegistrationIcon } from "@/assets/Icons";
 import { PieChart } from "@/components/Dashboard/PieChart";
 import VerticalBarChart from "@/components/Dashboard/VerticalBarChart";
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { getSingleAdminEvent, updateCertificateDetails } from "@/services/api";
 import axios from "axios";
@@ -13,6 +14,7 @@ function EventPage() {
   const router = useRouter();
   const { eventId } = router.query;
   const token = useSelector((state) => state.user.token);
+
   const [branch, setBranch] = useState({
     labels: [],
     branches: [],
@@ -23,8 +25,6 @@ function EventPage() {
   });
   const [users, setUsers] = useState(null);
   const [event, setEvent] = useState({});
-
-  console.log(event);
 
   const fetchEvent = async () => {
     const data = await getSingleAdminEvent({ eventId, token });
@@ -61,7 +61,9 @@ function EventPage() {
     const yearRes = await yearData.data;
     const usersRes = await listOfUsers.data;
 
-    const yearLabels = Object.keys(yearRes); // Extract keys as labels
+    let yearLabels = Object.keys(yearRes); // Extract keys as labels
+    yearLabels = yearLabels.map((year) => year + " Year");
+
     const yearDataset = Object.values(yearRes); // Extract values as dataset
     setYear({
       labels: yearLabels,
@@ -145,9 +147,39 @@ function EventPage() {
 
             {/* Analysis Tab */}
             <section className="analysis mt-32">
-              <h2 className="text-4xl font-semibold ">Analyse Your Event</h2>
-              <div className="flex justify-between mt-14">
+              <h2 className="text-5xl font-bold ">Event Analysis</h2>
+              <div className="flex items-end justify-between mt-14">
+                {/* Cards */}
                 <div className="max-w-3xl w-full">
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                      <h2 className="text-xl font-semibold mb-4">Pie Charts</h2>
+                      {/* Insert your pie charts component here */}
+                    </div>
+
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                      <h2 className="text-xl font-semibold mb-4">Bar Charts</h2>
+                      {/* Insert your visual charts component here */}
+                    </div>
+                  </div>
+
+                  {/* list  */}
+                  <div className="my-8">
+                    <h2 className="text-xl font-semibold mb-4">Key Insights</h2>
+                    <ul className="list-disc list-inside">
+                      <li className="mb-2">Demographic trends visualization</li>
+                      <li className="mb-2">
+                        Metrics breakdown for strategic planning
+                      </li>
+                      <li className="mb-2">
+                        Interactive analysis for informed decisions
+                      </li>
+                      <li className="mb-2">
+                        Comprehensive data representation
+                      </li>
+                    </ul>
+                  </div>
+
                   <VerticalBarChart
                     labels={branch.labels}
                     dataset={branch.branches}
@@ -160,8 +192,8 @@ function EventPage() {
               </div>
             </section>
 
-            <section className="mt-4">
-              <h1 className="text-4xl font-semibold ">Registred users</h1>
+            <section className="mt-24">
+              <h1 className="text-5xl font-semibold ">Registred users</h1>
               <div className="mt-6 overflow-x-auto">
                 <table className="border-separate border border-slate-400 w-full">
                   {/* head */}
@@ -182,7 +214,7 @@ function EventPage() {
                     {users?.map((user, i) => {
                       return (
                         <>
-                          <tr className="border-b">
+                          <tr className="border-b" key={i}>
                             <td className="border border-slate-300 text-center py-2">
                               {i + 1}
                             </td>
@@ -214,6 +246,7 @@ function EventPage() {
               </div>
             </section>
           </main>
+          <Footer />
         </div>
       </div>
     </>

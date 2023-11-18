@@ -1,12 +1,12 @@
 import { getAdminEvents } from "@/services/api";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-const useEvents = ({ showModal }) => {
+const useEvents = (showModal) => {
   const [events, setEvents] = useState([]);
+  const token = useSelector((state) => state.user.token);
 
   const fetchEvents = async () => {
-    const token = localStorage.getItem("accessToken");
-
     try {
       const response = await getAdminEvents(token);
 
@@ -17,6 +17,7 @@ const useEvents = ({ showModal }) => {
   };
 
   useEffect(() => {
+    console.log("fetching events again");
     fetchEvents();
   }, [showModal]);
 

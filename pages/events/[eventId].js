@@ -5,14 +5,23 @@ import { getSingleEvent } from "@/services/api";
 import React, { useEffect, useState } from "react";
 import Footer from "@/components/layout/Footer";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function EventPage({}) {
   // const { image } = event;
   const router = useRouter();
   const { eventId } = router.query;
   const [event, setEvent] = useState(null);
+  const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
+    if (!token) {
+      router.push("/login");
+      toast.error("Please login first!");
+      return;
+    }
+
     const fetch = async () => {
       const data = await getSingleEvent(eventId);
       setEvent(data[0]);

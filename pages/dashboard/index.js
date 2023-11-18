@@ -13,7 +13,7 @@ function Dashboard() {
   // const [showModal, setShowModal] = useState(false);
 
   const { isOpen } = useSelector((state) => state.modal);
-  const events = useEvents({ isOpen });
+  const events = useEvents(isOpen);
 
   const numberOfTotal = events.reduce(
     (tot, event) => tot + event.noOfRegistration,

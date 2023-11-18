@@ -49,7 +49,7 @@ function EventsList({ events }) {
     <>
       {deleteModal && (
         <>
-          {/* <div className="absolute top-0 left-0 h-screen overscroll-contain w-full bg-black/80"></div> */}
+          {/* <div className="absolute top-0 left-0 h-full overscroll-contain w-full bg-black/80"></div> */}
           <DeleteModal
             setDeleteModal={setDeleteModal}
             handleSubmit={handleDelete}
