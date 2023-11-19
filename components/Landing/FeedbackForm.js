@@ -22,7 +22,9 @@ function FeedbackForm() {
       email,
     });
     if (res) {
-      toast.success("Feedback submitted!");
+      toast.success(
+        "We have recieved your query we will respond as fast as possible!"
+      );
     }
   };
 
@@ -50,12 +52,12 @@ function FeedbackForm() {
                 EMAIL
               </h2>
               <a className="text-indigo-500 leading-relaxed">
-                jasspreetsbawa@gmail.com
+                Eventifymanagment@gmail.com
               </a>
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                 PHONE
               </h2>
-              <p className="leading-relaxed">123-456-7890</p>
+              <p className="leading-relaxed">62848-45645</p>
             </div>
           </div>
         </div>

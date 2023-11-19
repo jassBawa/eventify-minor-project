@@ -8,6 +8,7 @@ import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 function EventPage() {
@@ -114,6 +115,42 @@ function EventPage() {
     }
   };
 
+  const handleCertifyAll = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // Assuming the token follows the Bearer token format
+        },
+      };
+
+      const response = await axios.put(
+        "http://localhost:4040/api/event/register/" + eventId,
+        null, // No data being sent in the body for this request
+        config // Include the authorization token in the request headers
+      );
+
+      console.log("Certifications for all users toggled:", response.data);
+      toast.promise(
+        // Promise that resolves after 2 seconds
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("Successfully updated!");
+          }, 2000); // Resolves after 2 seconds
+        }),
+        {
+          loading: "Updating...", // Message while the promise is pending
+          success: (message) => message, // Success message when the promise resolves
+          duration: 2000, // Duration in milliseconds for the toast to automatically dismiss
+        }
+      );
+      fetchEvent();
+      // Optionally, you can perform actions after the certification toggle
+    } catch (error) {
+      console.error("Error toggling certifications for all users:", error);
+      // Handle errors or show error messages to the user
+    }
+  };
+
   return (
     <>
       <div className="bg-gray-100">
@@ -124,18 +161,14 @@ function EventPage() {
           <main className="h-full bg-gray-100 py-6 px-16 ">
             {/* Details */}
             <section className="relative flex flex-col gap-12  justify-between container mx-auto mt-8">
-              <div className="event__container flex gap-4">
-                <img src={event?.image} alt="" className="h-48" />
+              <div className="event__container flex items-center gap-4">
+                <img src={event?.image} alt="" className="max-h-64" />
                 <div className="py-6">
                   <h1 className="text-3xl font-bold text-gray-800 mb-2">
                     {event.eventName}
                   </h1>
-                  <p className="text-gray-400 w-3/4">
+                  <p className="text-gray-400 w-3/4 tracking-wide">
                     {event.description}
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-                    porro cum neque dolore eos distinctio, natus eligendi facere
-                    deleniti magni fuga consequuntur! Ea, dolorum omnis officiis
-                    quia quisquam nobis ex.
                   </p>
                 </div>
               </div>
@@ -198,8 +231,14 @@ function EventPage() {
               </div>
             </section>
 
-            <section className="mt-24">
+            <section className="mt-24 relative">
               <h1 className="text-5xl font-semibold ">Registred users</h1>
+              <button
+                onClick={handleCertifyAll}
+                className="btn btn-md btn-primary absolute right-16 top-2"
+              >
+                Certify All
+              </button>
               <div className="mt-6 overflow-x-auto">
                 <table className="border-separate border border-slate-400 w-full">
                   {/* head */}

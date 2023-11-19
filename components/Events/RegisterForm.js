@@ -20,9 +20,15 @@ function RegisterForm() {
 
     const data = { name, email, phone: +phone, year, branch, section };
     console.log(data);
-    // const res = await registerEvent(eventId, data);
-    // console.log(res);
-    toast.success("Registered Successfully!");
+    const res = await registerEvent(eventId, data);
+    console.log(res);
+
+    if (res.response.status == 400) {
+      toast.error("you are already registred in this event");
+      return;
+    } else {
+      toast.success("Registered Successfully!");
+    }
   };
 
   return (

@@ -31,27 +31,22 @@ function Footer() {
               <h2 className="title-font font-medium text-gray-50 tracking-widest text-sm mb-3">
                 CATEGORIES
               </h2>
-              <nav className="list-none space-y-1 mb-10">
-                <li>
+              <nav className="list-none flex-col space-y-1 mb-10">
+                <Link href="/category/sports" className="block">
                   <span href="#" className="text-gray-200 hover:text-gray-400">
                     Sports
                   </span>
-                </li>
-                <li>
+                </Link>
+                <Link href="/category/technical" className="block">
                   <span href="#" className="text-gray-200 hover:text-gray-400">
                     Technical
                   </span>
-                </li>
-                <li>
+                </Link>
+                <Link href="/category/cultural" className="block">
                   <span href="#" className="text-gray-200 hover:text-gray-400">
                     Cultural
                   </span>
-                </li>
-                <li>
-                  <span href="#" className="text-gray-200 hover:text-gray-400">
-                    See All
-                  </span>
-                </li>
+                </Link>
               </nav>
             </div>
             <div className="  w-full px-4">
@@ -61,29 +56,27 @@ function Footer() {
               <nav className="list-none space-y-1 mb-10">
                 <li>
                   <Link
-                    href={{
-                      pathname: "/64a11df3949d6783958fee31",
-                      query: { name: "Cultural Commmittee" },
-                    }}
+                    href="/society/Cultural Commitee"
                     className="text-gray-200 hover:text-gray-400"
                   >
                     Cultural Committe
                   </Link>
                 </li>
                 <li>
-                  <a className="text-gray-200 hover:text-gray-400">
+                  <Link
+                    href="/society/Computer society of india"
+                    className="text-gray-200 hover:text-gray-400"
+                  >
                     Computer Society of India
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-200 hover:text-gray-400">
+                  <Link
+                    href="/society/Data-Science Club"
+                    className="text-gray-200 hover:text-gray-400"
+                  >
                     Data-Science Club
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-200 hover:text-gray-400">
-                    Itian Club
-                  </a>
+                  </Link>
                 </li>
               </nav>
             </div>

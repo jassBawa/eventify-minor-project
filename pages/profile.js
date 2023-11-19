@@ -89,8 +89,8 @@ function Profile() {
                 <tr>
                   <th>S. No.</th>
                   <th>Name</th>
-                  <th>Job</th>
-                  <th>Favorite Color</th>
+                  <th>Society</th>
+                  <th>Certificate</th>
                 </tr>
               </thead>
               <tbody className="text-md">

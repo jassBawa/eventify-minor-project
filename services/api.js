@@ -108,18 +108,20 @@ export const deleteEvent = async (eventId, apiHeaders) => {
 
 // to register for event
 export const registerEvent = async (url, registerEventParams) => {
-  const res = await axios.post(
-    `http://localhost:4040/api/event/register/` + url,
-    registerEventParams,
-    {
-      headers: {
-        Authorization: `Bearer ` + state.user.token,
-      },
-    }
-  );
-  const data = res.data;
-
-  return data;
+  try {
+    const res = await axios.post(
+      `http://localhost:4040/api/event/register/` + url,
+      registerEventParams,
+      {
+        headers: {
+          Authorization: `Bearer ` + state.user.token,
+        },
+      }
+    );
+    return res.data;
+  } catch (e) {
+    return e;
+  }
 };
 
 // to get details of registered users
