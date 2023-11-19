@@ -23,12 +23,15 @@ function RegisterForm() {
     const res = await registerEvent(eventId, data);
     console.log(res);
 
-    if (res.response.status == 400) {
-      toast.error("you are already registred in this event");
-      return;
-    } else {
+    if (res) {
       toast.success("Registered Successfully!");
     }
+
+    // if (res?.response?.status == 400) {
+    //   toast.error("you are already registred in this event");
+    //   return;
+    // }
+    // toast.success("Registered Successfully!");
   };
 
   return (

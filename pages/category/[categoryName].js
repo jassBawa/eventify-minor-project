@@ -1,4 +1,7 @@
 import Events from "@/components/Events/Events";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
+import EventBadges from "@/components/shared/EventBadges";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -29,14 +32,22 @@ function CategoryPage() {
   if (!events) return;
 
   return (
-    <main className="container mx-auto">
-      <h2 className="text-5xl mb-8 font-bold text-gray-900 mt-16 ">
-        {categoryName}
-      </h2>
+    <>
+      <Navbar />
+      <main className="container mx-auto">
+        <div className="-ml-16">
+          <EventBadges />
+        </div>
 
-      <Events events={events} />
-      {/* </div> */}
-    </main>
+        <h2 className="text-5xl mb-8 font-bold text-gray-900 mt-16 ">
+          {categoryName} Events
+        </h2>
+
+        <Events events={events} />
+        {/* </div> */}
+      </main>
+      <Footer />
+    </>
   );
 }
 

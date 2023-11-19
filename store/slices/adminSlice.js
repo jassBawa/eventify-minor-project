@@ -19,6 +19,7 @@ const userSlice = createSlice({
       state.token = "";
       state.isLoggedIn = false;
       state.name = "";
+      state.isAdmin = false;
     },
   },
 });

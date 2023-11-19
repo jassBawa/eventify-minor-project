@@ -4,7 +4,6 @@ import Link from "next/link";
 import React from "react";
 
 function EventCard({ event, isDisabled = false, badge = "NEW" }) {
-  console.log(event);
   const { eventName, date, image, category, venue } = event;
   const formattedDate = formatDate(date);
 

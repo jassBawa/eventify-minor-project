@@ -31,13 +31,13 @@ function Dashboard() {
   const events = useEvents(isOpen, isDeleteModalOpen);
 
   const numberOfTotal = events.reduce(
-    (tot, event) => tot + event.noOfRegistration,
+    (tot, event) => tot + (event.noOfRegistration ? event.noOfRegistration : 0),
     0
   );
 
   return (
     <>
-      <div className="relative bg-gray-100 h-full">
+      <>
         <Navbar />
 
         <main className=" h-full bg-gray-100">
@@ -63,7 +63,7 @@ function Dashboard() {
             <EventsList events={events} />
           </div>
         </main>
-      </div>
+      </>
     </>
   );
 }

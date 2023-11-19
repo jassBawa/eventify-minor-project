@@ -94,6 +94,11 @@ function Profile() {
                 </tr>
               </thead>
               <tbody className="text-md">
+                {events.length === 0 ? (
+                  <h2 className="text-center text-4xl my-8">
+                    You haven&apos;t attended any event yet.
+                  </h2>
+                ) : null}
                 {events?.map((event, index) => {
                   const { event_id } = event;
                   if (!event_id) return null;

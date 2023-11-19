@@ -1,5 +1,6 @@
 import { store } from "@/store/store";
 import axios from "./axios";
+import toast from "react-hot-toast";
 
 // const BASE_URL = "http://localhost:4040/api"
 
@@ -22,6 +23,7 @@ export const userLogin = async (loginParams) => {
     const data = res.data;
     return data;
   } catch (err) {
+    toast.error(err?.response?.data.message);
     console.log(err);
   }
 };
@@ -32,6 +34,7 @@ export const userRegister = async (registerParams) => {
     const data = res.data;
     return data;
   } catch (err) {
+    // toast.error(err.message);
     console.log(err);
   }
 };
@@ -39,8 +42,7 @@ export const userRegister = async (registerParams) => {
 // ----------------------------- Admin Events -----------------------------
 
 export const createEvent = async (createEventParams) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = { Authorization: `Bearer ${state.user.token}` };
 
   const res = await axios.post(createEventUrl, createEventParams, {
     headers: headers,
@@ -51,8 +53,7 @@ export const createEvent = async (createEventParams) => {
 };
 
 export const updateEvent = async (eventId, updateEventParams) => {
-  const token = localStorage.getItem("accessToken");
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = { Authorization: `Bearer ${state.user.token}` };
 
   const res = await axios.put(
     `${updateEventUrl + eventId}`,
@@ -120,7 +121,8 @@ export const registerEvent = async (url, registerEventParams) => {
     );
     return res.data;
   } catch (e) {
-    return e;
+    console.log(e);
+    toast.error(e.response?.data);
   }
 };
 
@@ -173,13 +175,13 @@ export const giveFeedback = async (feedbackParams) => {
 };
 
 export const getRegistrationByUserID = async () => {
+  const headers = { Authorization: `Bearer ${state.user.token}` };
+
   try {
     const res = await axios.get(
       "http://localhost:4040/api/event/registrations",
       {
-        headers: {
-          Authorization: "Bearer " + state.user.token,
-        },
+        headers,
       }
     );
     const data = res.data;

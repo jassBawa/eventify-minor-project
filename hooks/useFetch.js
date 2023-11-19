@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 /**
  * Custom hook to fetch data from an API endpoint.
@@ -15,6 +16,7 @@ const useFetch = (endPoint, options) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const fetchEndPoint = useMemo(() => `${BASE_URL}/${endPoint}`, [endPoint]);
+  const token = useSelector((state) => state.user.token);
 
   /**
    * Function to fetch data from the API.
@@ -22,14 +24,12 @@ const useFetch = (endPoint, options) => {
   const fetchData = useCallback(() => {
     setIsLoading(true);
 
-    const localToken = localStorage.getItem("token");
-
     const headers = {
       "Content-Type": "application/json",
     };
 
-    if (localToken) {
-      headers.Authorization = `Bearer ${localToken}`;
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
     }
 
     fetch(fetchEndPoint, {
@@ -52,7 +52,7 @@ const useFetch = (endPoint, options) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [fetchEndPoint, options]);
+  }, [fetchEndPoint, options, token]);
 
   useEffect(() => {
     // Do nothing if the endPoint is not given

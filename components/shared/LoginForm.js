@@ -38,7 +38,6 @@ function LoginForm() {
 
     if (res) {
       toast.success("Logged In");
-      localStorage.setItem("accessToken", res.token);
 
       dispatch(
         setUserData({
@@ -50,8 +49,6 @@ function LoginForm() {
       );
 
       router.push("/");
-    } else {
-      toast.error("Something went wrong");
     }
   };
 

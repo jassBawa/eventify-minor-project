@@ -36,7 +36,7 @@ function EventPage({}) {
   return (
     <div className="bg-[#f1f2f3] ">
       <Navbar classes="" />
-      <main className="bg-[#f1f2f3] h-screen overflow-auto">
+      <main className="bg-[#f1f2f3] ">
         <SingleEventHero image={event.image} />
         <SingleEventDetails event={event} />
       </main>

@@ -31,7 +31,7 @@ function Events({ events }) {
   return (
     <>
       {upcomingEvents.length > 0 && (
-        <section className="container mx-auto mt-24">
+        <section className="container mx-auto mt-16">
           <h2 className="text-3xl font-semibold">Upcoming Events</h2>
           <div className="mt-8 grid grid-cols-3 gap-8 text-center -m-4">
             {upcomingEvents.map((event) => (

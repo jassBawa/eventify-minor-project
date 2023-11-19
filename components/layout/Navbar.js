@@ -42,7 +42,7 @@ function Navbar({ classes = "" }) {
               Profile
             </Link>
           )}
-          <Link href="events" className="mr-5 hover:text-gray-900">
+          <Link href="/events" className="mr-5 hover:text-gray-900">
             Events
           </Link>
           <Link href="/about-us" className="mr-5 hover:text-gray-900">

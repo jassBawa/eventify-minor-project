@@ -23,7 +23,7 @@ function Footer() {
               <span className="ml-3 text-xl">Eventify</span>
             </a>
             <p className="mt-2 text-sm text-gray-300">
-              Air plant banjo lyft occupy retro adaptogen indego
+              An event management website
             </p>
           </div>
           <div className="grid grid-cols-3 w-full md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
